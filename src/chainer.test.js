@@ -19,8 +19,10 @@ describe('chainer', () => {
     expect(typeof chainer([f1, f2, f3])).toBe('function');
   });
 
-  it('should apply functions in order', () => {
-    expect(chainer([f1, f2, f3])(0)).toBe(4);
+  it('should apply functions in right-to-left order', () => {
+    expect(chainer([f1, f2, f3])(2)).toBe(36);
+
+    expect(chainer([f3, f2, f1])(2)).toBe(12);
   });
 
   it('should work with a single function', () => {
@@ -29,9 +31,5 @@ describe('chainer', () => {
 
   it('should work with an empty function list', () => {
     expect(chainer([])(10)).toBe(10);
-  });
-
-  it('should correctly apply multiple functions', () => {
-    expect(chainer([f1, f2, f3])(2)).toBe(36); // (2 * 2) + 2 = 6, 6^2 = 36
   });
 });
